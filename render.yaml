@@ -1,0 +1,41 @@
+# Render blueprint for the Go service. Mongo and Redis are expected to come
+# from MongoDB Atlas and Upstash (both have free tiers), so only the API and
+# the static frontend are defined here.
+services:
+  - type: web
+    name: livepolls-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /healthz
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB
+        value: livepolls
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false
+      - key: PUBLIC_APP_URL
+        sync: false
+
+  - type: web
+    name: livepolls-web
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE
+        sync: false
+    routes:
+      # Client-side routing: every path serves the app shell.
+      - type: rewrite
+        source: /*
+        destination: /index.html

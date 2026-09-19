@@ -1,0 +1,663 @@
+/* ---------------------------------------------------------------
+   Tally - design tokens
+
+   The product is a ballot that fills in while you watch it, so the
+   palette is paper and ink with one loud marker colour. The marker
+   is spent only on a result filling in; nothing else competes.
+   --------------------------------------------------------------- */
+
+:root {
+  --paper: #f1f4f8;
+  --sheet: #ffffff;
+  --ink: #171a2e;
+  --ink-soft: #5b6178;
+  --ink-faint: #9aa0b4;
+  --rule: #dde3ec;
+  --ballot: #2f42e8;
+  --marker: #d7f24a;
+  --marker-deep: #b9d62f;
+  --flag: #d93a4a;
+
+  --radius: 10px;
+  --gap: 1.25rem;
+  --measure: 62ch;
+
+  --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Bricolage Grotesque", var(--sans);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "tnum" 1;
+}
+
+a {
+  color: var(--ballot);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ballot);
+  outline-offset: 2px;
+}
+
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- navigation ---------------- */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+  background: var(--sheet);
+}
+
+.nav__mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* A single marker stroke stands in for a logo. */
+.nav__markGlyph {
+  width: 22px;
+  height: 12px;
+  background: var(--marker);
+  border-radius: 2px;
+  transform: skewX(-12deg);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.foot {
+  margin-top: auto;
+  padding: 2rem clamp(1rem, 5vw, 3rem);
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+
+/* ---------------- layout ---------------- */
+
+.page {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 5vw, 3rem) 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.page--narrow {
+  width: min(460px, 100%);
+}
+
+.page--poll {
+  width: min(780px, 100%);
+}
+
+.page--center {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.h1 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.h2 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+}
+
+.muted {
+  color: var(--ink-soft);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.card {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: clamp(1.1rem, 3vw, 1.75rem);
+}
+
+/* ---------------- hero ---------------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 5vw, 3rem);
+  align-items: center;
+  padding-top: clamp(1rem, 5vw, 3rem);
+}
+
+@media (min-width: 880px) {
+  .hero {
+    grid-template-columns: 1.05fr 1fr;
+  }
+}
+
+.hero__title {
+  font-family: var(--display);
+  font-size: clamp(2.3rem, 6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin: 0 0 1rem;
+  max-width: 16ch;
+}
+
+.hero__sub {
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 0 0 1.75rem;
+  font-size: 1.05rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.demo {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 18px 40px -32px rgba(23, 26, 46, 0.6);
+}
+
+.demo__question {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.demo__foot {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.5rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+
+/* ---------------- the ballot rows ---------------- */
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 62px;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  overflow: hidden;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+}
+
+/* The result is a marker stroke swiped across the line, behind the text. */
+.row__fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: color-mix(in srgb, var(--marker) 55%, white);
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.row--leading .row__fill {
+  background: var(--marker);
+}
+
+.row__label,
+.row__figures {
+  position: relative;
+  z-index: 1;
+}
+
+.row__label {
+  font-weight: 500;
+}
+
+.row__figures {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.row__percent {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.row__count {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+button.row {
+  cursor: pointer;
+}
+
+button.row:hover {
+  border-color: var(--ballot);
+}
+
+.row--selected {
+  border-color: var(--ballot);
+  box-shadow: inset 0 0 0 1px var(--ballot);
+}
+
+/* Motion only when a count actually moves. */
+@keyframes flash {
+  0% {
+    box-shadow: inset 0 0 0 0 var(--marker-deep);
+  }
+  35% {
+    box-shadow: inset 0 0 0 3px var(--marker-deep);
+  }
+  100% {
+    box-shadow: inset 0 0 0 0 var(--marker-deep);
+  }
+}
+
+.row--flash {
+  animation: flash 900ms ease-out;
+}
+
+@keyframes swipe {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(var(--to));
+  }
+}
+
+.row--demo {
+  min-height: 54px;
+}
+
+.row__fill--demo {
+  animation: swipe 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row__fill,
+  .row__fill--demo {
+    transition: none;
+    animation-duration: 1ms;
+  }
+  .row--flash {
+    animation: none;
+    border-color: var(--marker-deep);
+  }
+}
+
+/* ---------------- poll header ---------------- */
+
+.pollHead__by {
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  margin: 0 0 0.35rem;
+}
+
+.pollHead__q {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.9rem;
+  max-width: 20ch;
+}
+
+.pollHead__state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.tag--live {
+  background: color-mix(in srgb, var(--marker) 40%, white);
+  color: #4a5411;
+}
+
+.tag--closed {
+  background: var(--rule);
+  color: var(--ink-soft);
+}
+
+.tally {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--marker-deep);
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}
+
+.voteBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.pollFoot {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+/* ---------------- forms ---------------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.field--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.field small {
+  color: var(--ink-faint);
+}
+
+input,
+select {
+  font: inherit;
+  color: var(--ink);
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--sheet);
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--ballot);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.options__row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.check input {
+  width: auto;
+}
+
+.alert {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--flag) 10%, white);
+  border: 1px solid color-mix(in srgb, var(--flag) 35%, white);
+  color: #8a1f2c;
+  font-size: 0.9rem;
+}
+
+.created {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.share {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.share__url {
+  flex: 1 1 260px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* ---------------- buttons ---------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: var(--sheet);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  border-color: var(--ink-faint);
+}
+
+.btn--solid {
+  background: var(--ballot);
+  border-color: var(--ballot);
+  color: #fff;
+}
+
+.btn--solid:hover {
+  background: #2536c4;
+  border-color: #2536c4;
+}
+
+.btn--lg {
+  padding: 0.75rem 1.4rem;
+  font-size: 1rem;
+}
+
+.btn--sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.btn--quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-soft);
+}
+
+.btn--danger {
+  color: var(--flag);
+  border-color: color-mix(in srgb, var(--flag) 30%, white);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------------- poll list ---------------- */
+
+.polls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.polls__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.polls__q {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.polls__q:hover {
+  text-decoration: underline;
+}
+
+.polls__meta {
+  margin: 0.15rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.polls__actions {
+  display: flex;
+  gap: 0.5rem;
+}
